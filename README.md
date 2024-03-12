@@ -106,33 +106,7 @@ case 0: {
     close(targetFD);
    }
 
-    // if(strcmp(args[0], "wc")==0){
-    // if(access(args[1], F_OK) != 0){
-    //     perror("File does not exist\n");
-    //     exit(EXIT_FAILURE);
-    // }
-    //     if(execvp(args[0], args)==-1){
-    //      perror("CHILD: exec failure!\n");
-    //      exit(EXIT_FAILURE); 
-    // }
-    //   }
-    //   if(strcmp(args[0], "test")==0 && strcmp(args[1], "-f")==0){
-    //     if(access(args[2], F_OK) == 0){
-    //         exit(0);
-    //     }
-    //     else{
-    //         exit(1);
-    //     }
-    //   }
-    // if(access(args[0], F_OK) != 0){
-    //     fprintf(stderr,"Command not found\n");
-    //     return;
-    // }
-    // if(access(args[0], X_OK) != 0){
-    //     fprintf(stderr,"Command not found\n");
-    //     return;
-    // }
-         
+    
     if(execvp(args[0], args)==-1){
     perror("Command not found\n");
     exit(EXIT_FAILURE); 
@@ -227,12 +201,7 @@ while(1){
         if (command_name == NULL) {
             continue;
         }
-        if(strcmp(command_name, "exit")==0){
-            //run through background processes, calling pkill(pid) on every single one of them
-            // try to kill all the background processes
-            //waitpid  all of the killed  background processes
-            //kill function comes here
-            // wait thru 
+        if(strcmp(command_name, "exit")==0){        
             break;
            // exit(0);
         } 
