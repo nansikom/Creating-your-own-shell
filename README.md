@@ -41,3 +41,4 @@ Run the shell
 Mobaxterm
 C
 Visual studiocode
+Note: This is a school project hosted by Oregon state university
