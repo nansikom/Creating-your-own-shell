@@ -230,7 +230,7 @@ if (is_background == 1){
         printf("Error: Dude you have too many background processes\n");
    }
 }else{
-
+    #wait for the signal before you exit
     waitpid(spawnPid, &childExitStatus, 0);
      if (WIFSIGNALED(childExitStatus)){
               printf("PID %d The process was terminated by a signal %d\n",spawnPid, WTERMSIG(childExitStatus));
