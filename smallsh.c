@@ -69,17 +69,7 @@ while(args[last_arg_index] !=NULL){
 }
 
 
-// if(strcmp(args[last_arg_index - 1], "&")==0){
-//     //Meaning its in actual background mode
-//     if(!foregroundonly){
-//     // go to background normal mode.
-//     is_background = 1;
-//     }
-//     // remove ampersand before u start doing the exec thing. 
-//     args[last_arg_index - 1] = NULL;
 
- 
-// }
  if(strcmp(args[last_arg_index - 1], "&")==0){
      is_background = 1;
      // remove ampersand before u start doing the exec thing. 
@@ -87,12 +77,6 @@ while(args[last_arg_index] !=NULL){
 
  } 
 
-//  if(foregroundonly){
-//      is_background = 0;
-//  }
-/*
-defining and setting of both structs for sig int and sigtstp
-*/
 
    
 
@@ -192,9 +176,7 @@ case 0: {
            perror("target open");
            exit(EXIT_FAILURE);
         }
-        // shifting the arguments down so they are handled we want exec to handle only arguments like the ls and not  the < or >
-        // this helps it handle the exec command only we want exec to only deal with commands
-        //
+       
         /*
         start the loop,continue until u reach the second to last argument,continue iteration
         move the elements in the args array by to positions thus removing the > and filename since there being over written.we dont waht them to come back
@@ -236,8 +218,7 @@ Hey add the process ID if its a background process to the array of background pr
 if (is_background == 1){
    // waitpid(spawnPid, &childExitStatus, 0);
     if(backgroundprocessesnumber < MAX_BACKGROUND_PROCESSES){
-    // resize the array to add in the new process ID to the array
-   // backgroundprocessid = realloc(backgroundprocessid, sizeof(pid_t) * (backgroundprocessesnum + 1));
+   
     backgroundprocessidarray[backgroundprocessesnumber] = spawnPid;
     // increment it to keep the number of process ID's in he array.
     printf("background process id is %d\n", spawnPid);
@@ -251,12 +232,6 @@ if (is_background == 1){
 }else{
 
     waitpid(spawnPid, &childExitStatus, 0);
-    //waitpid(spawnPid, &childExitStatus, WNOHANG);
-    //printf("background pid is %d\n", spawnPid);
-//       if(WIFEXITED(childExitStatus))
-//   {
-//           printf("Child process exited normally with exit status  %d\n", WEXITSTATUS(childExitStatus));
-//       }
      if (WIFSIGNALED(childExitStatus)){
               printf("PID %d The process was terminated by a signal %d\n",spawnPid, WTERMSIG(childExitStatus));
                     
@@ -265,13 +240,7 @@ if (is_background == 1){
 }
 //printf("PARENT(%d): Child(%d) terminated, Exiting!\n", getpid(), actualPid);
   }//else{
-//     waitpid(spawnPid, &childExitStatus, WNOHANG);
-//     printf("background pid is %d\n", spawnPid);
-//     //printf("Child process exited normally with exit status  %d\n", WEXITSTATUS(childExitStatus));
-//     //printf("The process was terminated by a signal %d\n", WTERMSIG(childExitStatus));
-//     //printf("PARENT(%d): Child(%d) terminated, Exiting!\n", getpid(), actualPid);
 
-// }
 break;
 
 }
@@ -351,33 +320,13 @@ while(1){
         if (isBlank){
             continue;
         }
-    //    if(command[strlen(command)-2] == '&'||command[strlen(command)-1] == '&'){
-    //     isforeground = 0;
-    //     command[strlen(command)-2] = '\0';
-    //    } 
+  
         char *command_name= strtok(command, "\t\n");
         if (command_name == NULL) {
             continue;
         }
         if(strcmp(command_name, "exit")==0){
-            //run through background processes, calling pkill(pid) on every single one of them
-            // try to kill all the background processes
-            //waitpid  all of the killed  background processes
-            //kill function comes here
-            // wait thru 
-        // for (int i = 0; i < backgroundprocessesnumber; i++) {
-        //  char pkill_command[256];
-        //  int status = -5;
-        // // index array and add in the process ID numbers  to the array.
-       
-        // snprintf(pkill_command, sizeof(pkill_command), "%s%d", "pkill -P ", backgroundprocessidarray[i]);
-        // system(pkill_command);
-        // printf("Killed process id %d with signal: %d\n",backgroundprocessidarray[i],WTERMSIG(status));
-        //  } 
-        //  //printf("Killed process id %d with signal: %d\n",backgroundprocessidarray[i],WTERMSIG(status));
-        //   for (int i = 0; i < backgroundprocessesnumber; i++){
-        //         waitpid(backgroundprocessidarray[i], NULL, 0);
-        //   }
+           
         int status;
           for(int i=0; i < backgroundprocessesnumber; i++){
              waitpid(backgroundprocessidarray[i], &status, 0);
@@ -436,11 +385,8 @@ while(1){
 
         }
 
-    //run through background processes
-    // call waitpid WNOHANG on all of them, any that return their PID have died, so remove them frmo the list
-    
+  
 }
-//return 0;
 }
 
  
