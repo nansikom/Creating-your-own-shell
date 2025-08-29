@@ -1,7 +1,44 @@
-# **Small Shell (smallsh)**
+# 🐚 Custom Linux Shell Implementation  
 
-This project implements a **custom shell in C** called `smallsh`.  
-It supports **foreground and background processes, signal handling, input/output redirection, and process control**, similar to a simplified Bash shell.  
+This project is a **custom shell program written in C**, designed to replicate core functionalities of a Unix/Linux shell environment. It demonstrates process management, signal handling, I/O redirection, and background job control — providing hands-on experience with low-level system programming.  
+
+## 🚀 Features  
+- **Command Execution**: Supports running user commands via `fork()` and `execvp()`.  
+- **Foreground and Background Processes**:  
+  - Run jobs in the foreground or append `&` to execute them in the background.  
+  - Tracks and manages multiple background processes with process IDs.  
+- **Signal Handling**:  
+  - Handles **SIGINT (`Ctrl+C`)** to interrupt foreground processes.  
+  - Handles **SIGTSTP (`Ctrl+Z`)** to toggle between normal mode and *foreground-only* mode.  
+- **Built-in Commands**:  
+  - `cd` – change directory (defaults to `$HOME` if no path provided).  
+  - `status` – reports how the last foreground process exited (status code or signal).  
+  - `exit` – terminates the shell, cleaning up all background processes.  
+- **I/O Redirection**: Supports `<` (input redirection) and `>` (output redirection).  
+- **Variable Expansion**: Expands `$$` into the shell’s process ID.  
+- **Comment & Blank Line Handling**: Ignores lines beginning with `#` or empty input.  
+
+## 🛠️ Technical Skills Demonstrated  
+- **C Programming** with system-level libraries.  
+- **Process Control** using `fork()`, `execvp()`, and `waitpid()`.  
+- **Signal Management** with `sigaction()` for robust handling of `SIGINT` and `SIGTSTP`.  
+- **File I/O** with `open()`, `dup2()`, and redirection logic.  
+- **Dynamic Process Tracking** with arrays for background job management.  
+
+## 📂 Use Case  
+This shell serves as an educational exercise in building fundamental operating system components. It simulates the behavior of real shells like Bash, reinforcing concepts of multitasking, signals, and resource management.  
+
+## 🎯 Motivation / Learning Outcomes
+
+This project was developed to deepen my understanding of **operating systems** and **system-level programming**.  
+
+Through building this shell, I learned:
+
+- ⚙️ How processes are created, executed, and managed in **Linux/Unix**.  
+- 🚦 The role of **signals** in process control and how to build robust signal handlers.  
+- 🖥️ How **foreground vs. background execution** works in a shell.  
+- 📂 Practical usage of **file descriptors** and how to implement **input/output redirection**.  
+- 🔄 How to design a program that mimics real-world tools (like **Bash**) while reinforcing OS concepts.  
 
 ---
 
@@ -10,7 +47,7 @@ It supports **foreground and background processes, signal handling, input/output
 To compile the program, run:  
 
 ```bash
-gcc --std=gnu99 -g -o smallsh smallsh.c
+g++ gcc --std=gnu99 -g -o smallsh smallsh.c
 ```
 
 This will generate an executable named `smallsh`.  
@@ -146,14 +183,6 @@ PID 12345 Exit status 0
 
 ---
 
-## **Key Concepts Demonstrated**
-- **Process creation** using `fork()` and `execvp()`.  
-- **Signal handling** using `sigaction()`.  
-- **Foreground vs background execution** with `waitpid()`.  
-- **Input/output redirection** with `dup2()`.  
-- **Dynamic process management** with arrays of background PIDs.  
-
----
 
 ## **Author**
 This program was developed for practice with **Unix process management, signals, and system calls** in C.  
